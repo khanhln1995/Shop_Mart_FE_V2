@@ -55,12 +55,13 @@ const divider = '#E6E8F0'
 // main: '#EF7822',
 // secondary main: '#ff903f',
 const primary = {
-    main: '#1F8505',
+    main: '#79B669',
     light: 'rgba(255, 121, 24, 0.60)',
-    dark: '#246E10',
+    dark: '#79B669',
     contrastText: '#FFFFFF',
     midPrimary: ' #FFF5ED',
     overLay: '#000000',
+    hover: '#1F8505',
 }
 const searchBoxBg = primary.main
 const secondary = {
@@ -72,9 +73,9 @@ const secondary = {
 }
 const whiteContainer = {
     main: '#F9FAFC',
-    light: '#EF7822',
-    dark: '#ff903f',
-    contrastText: '#EF7822',
+    light: '#1F8505',
+    dark: '#BCDBB4',
+    contrastText: '#1F8505',
 }
 const whiteText = {
     main: '#FFFFFF',
@@ -284,7 +285,7 @@ export const lightThemeOptions = {
         action: {
             active: neutral[500],
             focus: 'rgba(55, 65, 81, 0.12)',
-            hover: '#ff903f',
+            hover: '#BCDBB4',
             selected: 'rgba(55, 65, 81, 0.08)',
             disabledBackground: 'rgba(55, 65, 81, 0.12)',
             disabled: 'rgba(55, 65, 81, 0.26)',

@@ -1,8 +1,8 @@
-import usFlag from '../../../../../public/static/country-flag/us.svg'
+import usFlag from '../../../../../public/static/country-flag/USAFlag.png'
 import arFlag from '../../../../../public/static/country-flag/arabic-flag-svg.svg'
 import banFlag from '../../../../../public/static/country-flag/bangladesh (1).png'
 import spanFlag from '../../../../../public/static/country-flag/spain.png'
-import vnFlag from '../../../../../public/static/country-flag/vietnam-flag-svg.svg'
+import vnFlag from '../../../../../public/static/country-flag/VietNamFlag.png'
 export const languageLists = [
     // {
     //     languageName: 'Arabic',

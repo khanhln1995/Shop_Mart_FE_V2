@@ -54,38 +54,40 @@ const Homes = ({ configData }) => {
     const { filterData, foodOrRestaurant } = useSelector(
         (state) => state.searchFilterStore
     )
-
     const { userData } = useSelector((state) => state.user)
-
     const [sort_by, setSort_by] = useState('')
     const { searchTagData } = useSelector((state) => state.searchTags)
     const router = useRouter()
     const { query, page, restaurantType, tags } = router.query
     const { campaignFoods, banners, bestReviewedFoods, popularFood } =
         useSelector((state) => state.storedData)
-
     const { welcomeModal } = useSelector((state) => state.utilsData)
     const dispatch = useDispatch()
+
     const onSuccessHandler = (response) => {
         setFetcheedData(response)
         dispatch(setWishList(fetchedData))
     }
+
     const { refetch } = useWishListGet(onSuccessHandler)
     let getToken = undefined
     if (typeof window !== 'undefined') {
         getToken = localStorage.getItem('token')
     }
+
     useEffect(() => {
         if (getToken) {
             refetch().then()
         }
     }, [getToken, fetchedData])
+
     const theme = useTheme()
     const isSmall = useMediaQuery(theme.breakpoints.down('md'))
     let zoneid = undefined
     if (typeof window !== 'undefined') {
         zoneid = localStorage.getItem('zoneid')
     }
+
     const {
         data,
         refetch: refetchBannerData,
@@ -106,6 +108,7 @@ const Homes = ({ configData }) => {
         staleTime: 1000 * 60 * 8,
         cacheTime: 8 * 60 * 1000,
     })
+
     const {
         data: mostReviewedData,
         refetch: refetchMostReviewed,
@@ -123,25 +126,30 @@ const Homes = ({ configData }) => {
         enabled: false,
         onError: onSingleErrorResponse,
     })
-    useEffect(async () => {
-        if (
-            banners?.banners?.length === 0 &&
-            banners?.campaigns?.length === 0
-        ) {
-            await refetchBannerData()
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (
+                banners?.banners?.length === 0 &&
+                banners?.campaigns?.length === 0
+            ) {
+                await refetchBannerData()
+            }
+
+            if (campaignFoods?.length === 0) {
+                await refetchCampaignData()
+            }
+            if (bestReviewedFoods?.length === 0) {
+                await refetchMostReviewed()
+            }
+            if (popularFood?.length === 0) {
+                await refetchNearByPopularRestaurantData()
+            }
         }
 
-        if (campaignFoods?.length === 0) {
-            await refetchCampaignData()
-        }
-        if (bestReviewedFoods?.length === 0) {
-            await refetchMostReviewed()
-        }
-        if (popularFood?.length === 0) {
-            await refetchNearByPopularRestaurantData()
-        }
+        fetchData()
     }, [])
-    const iSSearchValue = false
+
     useEffect(() => {
         if (campaignData?.data) {
             dispatch(setCampaignFoods(campaignData?.data))
@@ -195,10 +203,7 @@ const Homes = ({ configData }) => {
                     >
                         <Typography
                             fontSize={{ xs: '16px', md: '20px' }}
-                            fontWeight={{
-                                xs: '500',
-                                md: '700',
-                            }}
+                            fontWeight={{ xs: '500', md: '700' }}
                             color={theme.palette.neutral[1000]}
                         >
                             {t('Find Best Restaurants and Foods')}
@@ -244,16 +249,13 @@ const Homes = ({ configData }) => {
                             />
                             <NewRestaurant />
                             {global && <Cuisines />}
-
                             {global?.banner_data?.promotional_banner_image && (
                                 <PromotionalBanner global={global} />
                             )}
-
                             <Restaurant />
                         </CustomContainer>
                     </>
                 )}
-
                 <CustomModal
                     setModalOpen={handleCloseWelcomeModal}
                     openModal={welcomeModal}
@@ -281,17 +283,26 @@ const Homes = ({ configData }) => {
                             />
                         </Box>
                         <Box mt={2}>
-                            <Typography variant="h5" mb={1} color={theme.palette.neutral[1000]}>
+                            <Typography
+                                variant="h5"
+                                mb={1}
+                                color={theme.palette.neutral[1000]}
+                            >
                                 {t('Welcome to ' + configData?.business_name)}
                             </Typography>
-                            <Typography variant="body2" lineHeight={'1.5'} color={theme.palette.neutral[1000]}>
+                            <Typography
+                                variant="body2"
+                                lineHeight={'1.5'}
+                                color={theme.palette.neutral[1000]}
+                            >
                                 {userData?.is_valid_for_discount
                                     ? t(
                                           `Get ready for a special welcome gift, enjoy a special discount on your first order within `
                                       ) +
                                       userData?.validity +
                                       '.'
-                                    : ''}{'  '}
+                                    : ''}
+                                {'  '}
                                 {t(
                                     `  Start exploring the best services around you.`
                                 )}

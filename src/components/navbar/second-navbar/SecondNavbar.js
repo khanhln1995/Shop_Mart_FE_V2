@@ -233,7 +233,7 @@ const SecondNavbar = ({ isSticky, cartListRefetch }) => {
                                             : (theme) =>
                                                   theme.palette.neutral[400],
                                     }}
-                                    src={`${customerbaseUrl}/${userData?.image}`}
+                                    src={`${userData?.image}`}
                                 />
                             </Box>
                         </Stack>
@@ -280,7 +280,7 @@ const SecondNavbar = ({ isSticky, cartListRefetch }) => {
         <NoSsr>
             <CustomNavBox isSticky={isSticky}>
                 <CustomContainer>
-                    <Toolbar disablegutters="true">
+                    <Toolbar disableGutters={true}>
                         <CustomStackFullWidth
                             ref={searchBoxRef}
                             direction="row"
