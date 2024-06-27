@@ -31,6 +31,7 @@ const CustomLanguage = ({
     const anchorRef = useRef(null)
     const { global } = useSelector((state) => state.globalSettings)
     const { countryFlag } = useSelector((state) => state.languageChange)
+    // console.log({ countryFlag })
     let location = undefined
     if (typeof window !== 'undefined') {
         location = localStorage.getItem('location')
@@ -132,12 +133,28 @@ const CustomLanguage = ({
                         disableRipple
                         key={index}
                         sx={{
-                            backgroundColor:
+                            // backgroundColor:
+                            //     language === lan.languageCode
+                            //         ? // alpha(theme.palette.primary.main, 0.8)
+                            //           '#B5FAA5'
+                            //         : 'inherit',
+                            borderTop:
                                 language === lan.languageCode
-                                    ? alpha(theme.palette.primary.main, 0.8)
+                                    ? '2px solid #1f8505'
+                                    : 'inherit',
+                            borderBottom:
+                                language === lan.languageCode
+                                    ? '2px solid #1f8505'
+                                    : 'inherit',
+                            borderRadius:
+                                language === lan.languageCode
+                                    ? '5px'
                                     : 'inherit',
                             '&:hover': {
-                                backgroundColor: 'primary.main',
+                                backgroundColor:
+                                    // 'primary.main'
+                                    '#D1D6CF',
+                                color: 'black',
                             },
                         }}
                     >
