@@ -252,10 +252,10 @@ const FoodDetailModal = ({
         }
     }
 
-    console.log({product});
+    console.log({ product })
     const handleAddUpdate = () => {
         if (productUpdate) {
-            console.log({selectedOptions});
+            console.log({ selectedOptions })
             //for updating
             let totalQty = 0
             const itemObject = {
@@ -602,7 +602,8 @@ const FoodDetailModal = ({
             let checkingFor = 'cart'
             if (
                 modalData[0]?.item_stock === 0 &&
-                selectedOptions?.length === 0 && modalData[0].stock_type!=="unlimited"
+                selectedOptions?.length === 0 &&
+                modalData[0].stock_type !== 'unlimited'
             ) {
                 CustomToaster('error', t('Out Of Stock'), 'add')
             } else {
@@ -904,9 +905,9 @@ const FoodDetailModal = ({
             //setVariationStock(minStock);
 
             // If stock type is limited or daily, check against minStock
-            if(quantity >= modalData[0]?.item_stock && isLimitedOrDaily){
+            if (quantity >= modalData[0]?.item_stock && isLimitedOrDaily) {
                 CustomToaster('error', t('Out Of Stock'), 'stock')
-            }else{
+            } else {
                 if (isLimitedOrDaily) {
                     tryUpdateQuantity(minStock)
                 } else {
@@ -1050,8 +1051,8 @@ const FoodDetailModal = ({
         return false
     }
 
-    const text1=t("only")
-    const text2=t("items available")
+    const text1 = t('only')
+    const text2 = t('items available')
 
     console.log('isDisabled', selectedOptions)
     return (
@@ -1104,7 +1105,7 @@ const FoodDetailModal = ({
                                                         {modalData.length > 0 &&
                                                             modalData[0]?.name}
                                                     </Typography>
-                                                    <VagSvg
+                                                    {/* <VagSvg
                                                         color={
                                                             Number(
                                                                 modalData[0]
@@ -1116,8 +1117,8 @@ const FoodDetailModal = ({
                                                                       .success
                                                                       .light
                                                         }
-                                                    />
-                                                    {modalData[0]
+                                                    /> */}
+                                                    {/* {modalData[0]
                                                         ?.halal_tag_status ===
                                                         1 &&
                                                         modalData[0]
@@ -1138,13 +1139,33 @@ const FoodDetailModal = ({
                                                                     <HalalSvg />
                                                                 </IconButton>
                                                             </Tooltip>
+                                                        )} */}
+                                                    {quantity >=
+                                                        modalData[0]
+                                                            ?.item_stock &&
+                                                        modalData[0]
+                                                            ?.stock_type !==
+                                                            'unlimited' && (
+                                                            <Typography
+                                                                fontSize="12px"
+                                                                color={
+                                                                    quantity >=
+                                                                        modalData[0]
+                                                                            ?.item_stock &&
+                                                                    theme
+                                                                        .palette
+                                                                        .info
+                                                                        .main
+                                                                }
+                                                            >
+                                                                ({text1}{' '}
+                                                                {
+                                                                    modalData[0]
+                                                                        ?.item_stock
+                                                                }{' '}
+                                                                {text2})
+                                                            </Typography>
                                                         )}
-                                                    {quantity >= modalData[0]?.item_stock && modalData[0]?.stock_type !== "unlimited" &&
-
-                                                        <Typography fontSize="12px" color={quantity >= modalData[0]?.item_stock && theme.palette.info.main}>
-                                                            ({text1} {modalData[0]?.item_stock} {text2})
-                                                        </Typography>
-                                                        }
                                                 </Stack>
                                                 <ReadMore
                                                     limits="100"
